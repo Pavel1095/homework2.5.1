@@ -18,10 +18,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee print(String name, String surname) {
+    public Employee remove(String name, String surname) {
         for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getFirstName(name) && employees.get(i).getLastName().equals(surname)) {
-                return employees.get(i);
+            if (employees.get(i).getFirstName().equals(name) && employees.get(i).getLastName().equals(surname)) {
+                return employees.remove(i);
             }
         }
         throw new EmployeeNotFoundException("Сотрудник не найден.");
@@ -40,30 +40,22 @@ public class EmployeeServiceImpl implements EmployeeService {
         return true;
     }
 
-
     @Override
-    public double getCalculateSumSalary() {
-        double sum = 0;
-        for (Employee employee : employees) {
-            if (employee != null) {
-                sum = sum + employee.getSalary();
+    public Employee search (String name, String surname) {
+        for (int i = 0; i < employees.size(); i++) {
+            if (employees.get(i).getFirstName().equals(name) && employees.get(i).getLastName().equals(surname)) {
+                return employees.get(i);
             }
         }
-        return sum;
+        throw new EmployeeNotFoundException("Сотрудник не найден.");
     }
-
     @Override
-    public int getEmployeeMinSalary() {
-        return 0;
-    }
-
-    @Override
-    public double getAverageSalaryEmployee() {
-        return 0;
-    }
-
-    @Override
-    public double add() {
-        return 0;
+    public boolean add(String name, String surname) {
+        for (int i = 0; i < employees.size(); i++) {
+            if (employees.get(i).getFirstName().equals(name) && employees.get(i).getLastName().equals(surname)) {
+                throw new EmployeeNotFoundException("Сотрудник с таким ФИО уже есть.");
+            }
+        }
+        return employees.add(new Employee(name,surname));
     }
 }

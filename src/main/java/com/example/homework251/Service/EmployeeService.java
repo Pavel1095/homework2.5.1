@@ -7,17 +7,11 @@ import java.util.List;
 public interface EmployeeService {
     public List<Employee> printAll();
 
-    public Employee print(String name,String surname);
+    public Employee remove(String name, String surname);
 
     public boolean completeCollection();
 
-    public double getCalculateSumSalary();
+    public Employee search(String name, String surname);
 
-    public int getEmployeeMinSalary();
-
-    public double getAverageSalaryEmployee();
-
-    public Employee search(String name,String surname);
-
-    public double add();
+    public boolean add(String name, String surname);
 }

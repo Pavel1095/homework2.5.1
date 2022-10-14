@@ -5,6 +5,7 @@ import com.example.homework251.model.Employee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -25,23 +26,26 @@ public class EmployeeController {
         return employeeService.printAll();
     }
 
-    @GetMapping("/completeCollection")
+    @GetMapping("/complete")
     public boolean completeCollectionEmployees() {
         return employeeService.completeCollection();
     }
 
-    @GetMapping("/sumSalary")
-    public String getCalculateSumSalary() {
-        return String.valueOf(employeeService.getCalculateSumSalary());
+    @GetMapping("/add")
+    public boolean add(@RequestParam String name,
+                       @RequestParam String surname) {
+        return employeeService.add(name, surname);
     }
 
-    @GetMapping("/minSalary")
-    public String getEmployeeMinSalary() {
-        return String.valueOf(employeeService.getEmployeeMinSalary());
+    @GetMapping("/remove")
+    public Employee remove(@RequestParam String name,
+                          @RequestParam String surname) {
+        return employeeService.remove(name, surname);
     }
 
-    @GetMapping("/averageSalary")
-    public String getAverageSalaryEmployee() {
-        return String.valueOf(employeeService.getAverageSalaryEmployee());
+    @GetMapping("/search")
+    public Employee search(@RequestParam String name,
+                         @RequestParam String surname) {
+        return employeeService.search(name, surname);
     }
 }
