@@ -22,29 +22,26 @@ public class EmployeeController {
 
     @GetMapping("/printAll")
     public List<Employee> printAllEmployee() {
-        return employeeService.printAllEmployee();
+        return employeeService.printAll();
     }
 
     @GetMapping("/completeCollection")
     public boolean completeCollectionEmployees() {
-        return employeeService.completeCollectionEmployees();
+        return employeeService.completeCollection();
     }
 
     @GetMapping("/sumSalary")
     public String getCalculateSumSalary() {
-        String calculateSumSalary = String.valueOf(employeeService.getCalculateSumSalary());
-        return calculateSumSalary;
+        return String.valueOf(employeeService.getCalculateSumSalary());
     }
 
     @GetMapping("/minSalary")
     public String getEmployeeMinSalary() {
-        String employeeMinSalary = String.valueOf(employeeService.getEmployeeMinSalary());
-        return employeeMinSalary;
+        return String.valueOf(employeeService.getEmployeeMinSalary());
     }
 
     @GetMapping("/averageSalary")
     public String getAverageSalaryEmployee() {
-        String averageSalaryEmployee = String.valueOf(employeeService.getAverageSalaryEmployee());
-        return averageSalaryEmployee;
+        return String.valueOf(employeeService.getAverageSalaryEmployee());
     }
 }

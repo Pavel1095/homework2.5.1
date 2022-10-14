@@ -1,54 +1,51 @@
 package com.example.homework251.model;
 
+import java.util.Objects;
+
 public class Employee {
 
-    private final int id;
-    private String fullName;
-    private int department;
-    private double salary;
-    private static int counter;
-
-    public Employee(String fullName, int department, double salary) {
-        id = ++counter;
-        this.fullName = fullName;
-        this.department = department;
-        this.salary = salary;
-    }
+    private String firstName;
+    private String lastName;
 
     @Override
     public String toString() {
-        return "Employee " +
-                "id = " + id +
-                ", fullName = '" + fullName + '\'' +
-                ", department = " + department +
-                ", salary = " + salary;
+        return "Employee{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName);
     }
 
-    public String getFullName() {
-        return fullName;
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName);
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public int getDepartment() {
-        return department;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setDepartment(int department) {
-        this.department = department;
+    public String getLastName() {
+        return lastName;
     }
 
-    public double getSalary() {
-        return salary;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setSalary(double salary) {
-        this.salary = salary;
+    public Employee(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 }

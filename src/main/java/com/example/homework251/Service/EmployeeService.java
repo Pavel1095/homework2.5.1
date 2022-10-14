@@ -5,10 +5,19 @@ import com.example.homework251.model.Employee;
 import java.util.List;
 
 public interface EmployeeService {
-        public List<Employee> printAllEmployee();
-        public boolean completeCollectionEmployees();
-        public int getCalculateSumSalary();
-        public int getEmployeeMinSalary();
-        public double getAverageSalaryEmployee();
+    public List<Employee> printAll();
 
+    public Employee print(String name,String surname);
+
+    public boolean completeCollection();
+
+    public double getCalculateSumSalary();
+
+    public int getEmployeeMinSalary();
+
+    public double getAverageSalaryEmployee();
+
+    public Employee search(String name,String surname);
+
+    public double add();
 }
