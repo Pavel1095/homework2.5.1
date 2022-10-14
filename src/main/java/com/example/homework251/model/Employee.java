@@ -9,10 +9,10 @@ public class Employee {
     private static int counter;
 
     public Employee(String fullName, int department, double salary) {
+        id = ++counter;
         this.fullName = fullName;
         this.department = department;
         this.salary = salary;
-        id = ++counter;
     }
 
     @Override
