@@ -32,8 +32,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
-    public boolean add(@RequestParam String name,
-                       @RequestParam String surname) {
+    public Employee add(@RequestParam String name,
+                        @RequestParam String surname) {
         return employeeService.add(name, surname);
     }
 

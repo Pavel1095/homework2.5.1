@@ -4,58 +4,55 @@ import com.example.homework251.ecxeption.EmployeeNotFoundException;
 import com.example.homework251.model.Employee;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public abstract class EmployeeServiceImpl implements EmployeeService {
 
-    List<Employee> employees = new ArrayList<>();
+    private final Map<String, Employee> employees;
+
+    public EmployeeServiceImpl() {
+        this.employees = new HashMap<>();
+    }
 
     @Override
     public List<Employee> printAll() {
-        return employees;
+        return (List<Employee>) employees;
     }
 
     @Override
-    public Employee remove(String name, String surname) {
-        for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getFirstName().equals(name) && employees.get(i).getLastName().equals(surname)) {
-                return employees.remove(i);
-            }
+    public Employee remove(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);
+        if (employees.containsKey(employee.getFullName())) {
+            return employees.remove(employee.getFullName());
         }
         throw new EmployeeNotFoundException("Сотрудник не найден.");
     }
 
+
     @Override
-    public boolean completeCollection() {
-        employees.add(new Employee("Иванов","Иван"));
-        employees.add(new Employee("Сидоров","Петр"));
-        employees.add(new Employee("Карелин","Алексей"));
-        employees.add(new Employee("Табуреткин","Роман"));
-        employees.add(new Employee("Карпов","Никита"));
-        employees.add(new Employee("Воронов","Артем"));
-        employees.add(new Employee("Петров","Павел"));
-        employees.add(new Employee("Александров","Станислав"));
-        return true;
+    public Employee search(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);
+
+        if (employees.containsKey(employee.getFullName())) {
+            return employees.get(employee.getFullName());
+        }
+
+        throw new EmployeeNotFoundException("Сотрудник не найден.");
     }
 
     @Override
-    public Employee search (String name, String surname) {
-        for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getFirstName().equals(name) && employees.get(i).getLastName().equals(surname)) {
-                return employees.get(i);
-            }
+    public Employee add(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);
+        if (employees.containsKey(employee.getFullName())) {
+            throw new EmployeeNotFoundException("Сотрудник с таким ФИО уже есть.");
         }
-        throw new EmployeeNotFoundException("Сотрудник не найден.");
+        employees.put(employee.getFullName(), (Employee) employees);
+        return employee;
     }
+
     @Override
-    public boolean add(String name, String surname) {
-        for (int i = 0; i < employees.size(); i++) {
-            if (employees.get(i).getFirstName().equals(name) && employees.get(i).getLastName().equals(surname)) {
-                throw new EmployeeNotFoundException("Сотрудник с таким ФИО уже есть.");
-            }
-        }
-        return employees.add(new Employee(name,surname));
+    public Collection<Employee> findAll(){
+        return Collections.unmodifiableCollection(employees.values());
     }
 }
